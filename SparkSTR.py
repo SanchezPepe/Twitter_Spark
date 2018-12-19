@@ -4,7 +4,7 @@ from pyspark.sql import SQLContext
 from pyspark.sql.functions import desc
 
 sc = SparkContext("local[2]", "TwitterDemo")
-ssc = StreamingContext(sc, 10 )
+ssc = StreamingContext(sc, 10)
 sqlContext = SQLContext(sc)
 ssc.checkpoint( "file:///Users/Pepe/Desktop/Github/FinalBDNR/Files/checkpoint")
 
