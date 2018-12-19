@@ -67,4 +67,4 @@ if __name__ == "__main__":
 
   print( "Received request from: " + str( addr ) )
 
-  sendData( c )
+  sendData(c)

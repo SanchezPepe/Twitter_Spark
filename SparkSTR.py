@@ -3,7 +3,6 @@ from pyspark.streaming import StreamingContext
 from pyspark.sql import SQLContext
 from pyspark.sql.functions import desc
 
-
 sc = SparkContext("local[2]", "TwitterDemo")
 ssc = StreamingContext(sc, 10 )
 sqlContext = SQLContext(sc)
@@ -17,8 +16,7 @@ from collections import namedtuple
 fields = ("tag", "count" )
 Tweet = namedtuple( 'Tweet', fields )
 
-(lines
-  .flatMap( lambda text: text.split( " " ) )
+(lines.flatMap( lambda text: text.split( " " ) )
   #.filter( lambda word: word.lower().startswith("") )
   .map( lambda word: ( word.lower(), 1 ) )
   .reduceByKey( lambda a, b: a + b )
