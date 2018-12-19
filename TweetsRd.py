@@ -52,7 +52,7 @@ def sendData(c_socket):
   auth.set_access_token(access_token, access_secret)
 
   twitter_stream = Stream(auth, TweetsListener(c_socket))
-  twitter_stream.filter(track=['AMLO'])
+  twitter_stream.filter(track=['lula'])
 
 if __name__ == "__main__":
   s = socket.socket()         # Create a socket object
