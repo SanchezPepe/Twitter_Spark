@@ -4,11 +4,27 @@ from tweepy import Stream
 from tweepy.streaming import StreamListener
 import socket
 import json
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+from stop_words import get_stop_words
+from nltk.corpus import stopwords
 
 consumer_key = 'jZJhWfSNiBbMp1a6Ov9LrMk92'
 consumer_secret = 'CvfvGaoWCwm3tmnusyNlH7JyaPJxeHV918tEYoIm4YASUQxvMP'
 access_token = '801576292608921600-3P8OkCsVGUP7gRgYaKmXHGwoERTuZ7q'
 access_secret = 'LAABWy0FkvFF4oTF00vn847HZHYh9yYG90qB3OAof0PFo'
+
+stop_words = list(get_stop_words('es'))         #Have around 900 stopwords
+nltk_words = list(stopwords.words('spanish'))   #Have around 150 stopwords
+stop_words.extend(nltk_words)
+
+def clean(tweet):
+    output = []
+    for palabra in tweet:
+        if not palabra in stop_words:
+            output.append(palabra)
+    return ' '.join(output)
 
 class TweetsListener(StreamListener):
 
@@ -18,8 +34,10 @@ class TweetsListener(StreamListener):
   def on_data(self, data):
       try:
           msg = json.loads( data )
-          print( msg['text'].encode('utf-8') )
-          self.client_socket.send( msg['text'].encode('utf-8') )
+          lista =  msg['text'].split()
+          tweet = clean(lista) 
+          print(tweet)
+          self.client_socket.send(tweet.encode())
           return True
       except BaseException as e:
           print("Error on_data: %s" % str(e))
