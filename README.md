@@ -15,6 +15,11 @@ _SparkSTR.py_, _spark_hashtags.py_ | Inicia Spark, trabaja los datos del socket 
 ## Instrucciones
 Configurar las API Keys que proporciona Twitter
 
+De ser necesario abrir el puerto utilizando el comando en Netcat
+```
+.\nc.exe -l -p PUERTO
+```
+
 Para correr cualquiera de las dos diferentes consultas, basta con ejecutar los bats adjuntos:
 Si se desea correr la búsqueda por palabras:
 1. _tweets.bat_
@@ -26,6 +31,8 @@ Si se desea correr la búsqueda por tendencias:
 
 ## Resultados
 
+### Ocurrencias de palabras en búsqueda
 ![G1](Figure_1.png)
 
+### Ocurrencias de hastags
 ![G2](Figure_2.png)
