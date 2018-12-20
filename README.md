@@ -1,4 +1,4 @@
-# Twitter_Spark
+# Realtime tweet streaming using Apache Spark
 Spark Streaming using Twitter API
 
 :+1: :sparkles: :camel: :tada: :rocket: :metal: :octocat: 
