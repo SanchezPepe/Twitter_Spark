@@ -3,21 +3,26 @@ from pyspark.streaming import StreamingContext
 from pyspark.sql import SQLContext
 from pyspark.sql.functions import desc
 
-sc = SparkContext("local[2]", "TwitterDemo")
+sc = SparkContext("local[2]", "Twitter_Streaming")
 ssc = StreamingContext(sc, 10)
 sqlContext = SQLContext(sc)
 ssc.checkpoint( "file:///Users/Pepe/Desktop/Github/FinalBDNR/Files/checkpoint")
 
 socket_stream = ssc.socketTextStream("localhost", 4040)
-
 lines = socket_stream.window(10)
+
+print("=================================AQUI===============================")
+lines.flatMap( lambda text: print(text.split( " " )))
+print("=================================AQUI===============================")
 
 from collections import namedtuple
 fields = ("tag", "count" )
 Tweet = namedtuple( 'Tweet', fields )
 
+#lines.foreachRDD( lambda rdd: rdd.coalesce(1).saveAsTextFile("./tweets/%f" % time.time()) )
+#print(lines)
+
 (lines.flatMap( lambda text: text.split( " " ) )
-  #.filter( lambda word: word.lower().startswith("") )
   .map( lambda word: ( word.lower(), 1 ) )
   .reduceByKey( lambda a, b: a + b )
   .map( lambda rec: Tweet( rec[0], rec[1] ) )
