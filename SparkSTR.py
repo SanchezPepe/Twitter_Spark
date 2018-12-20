@@ -32,8 +32,8 @@ from IPython import display
 
 count = 0
 while count < 10:
-  time.sleep( 20 )
-  top_10_tweets = sqlContext.sql( 'Select tag, count from tweets' )
+  time.sleep(60)
+  top_10_tweets = sqlContext.sql( 'Select tag, count from tweets  where count > 4' )
   top_10_df = top_10_tweets.toPandas()
   display.clear_output(wait=True)
   plt.figure( figsize = ( 10, 8 ) )
