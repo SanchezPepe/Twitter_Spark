@@ -2,6 +2,7 @@ from pyspark import SparkContext
 from pyspark.streaming import StreamingContext
 from pyspark.sql import SQLContext
 from pyspark.sql.functions import desc
+from pyspark.sql import Row, SparkSession
 
 sc = SparkContext("local[2]", "Twitter_Streaming")
 ssc = StreamingContext(sc, 10)
@@ -32,7 +33,7 @@ from IPython import display
 
 count = 0
 while count < 10:
-  time.sleep(60)
+  time.sleep(40)
   top_10_tweets = sqlContext.sql( 'Select tag, count from tweets  where count > 4' )
   top_10_df = top_10_tweets.toPandas()
   display.clear_output(wait=True)
