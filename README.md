@@ -8,9 +8,9 @@ Proyecto para la materia de Bases de Datos No Relacionales
 ## Directorio
 Archivo | Función
 ------------ | -------------
-ReadTweets.py | Recibe los tweets y manda al socket el texto del tweet 'limpio'
-hashtags.py | Similar a ReadTweets.py pero manda el hashtag del tweet
-SparkSTR.py, spark_hashtags.py | Inicia Spark, trabaja los datos del socket y grafica
+_ReadTweets.py_ | Recibe los tweets y manda al socket el texto del tweet 'limpio'
+_hashtags.py_ | Similar a ReadTweets.py pero manda el hashtag del tweet
+_SparkSTR.py_, _spark_hashtags.py_ | Inicia Spark, trabaja los datos del socket y grafica
 
 ## Instrucciones
 Configurar las API Keys que proporciona Twitter
