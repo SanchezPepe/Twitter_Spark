@@ -18,31 +18,25 @@ access_token = '801576292608921600-3P8OkCsVGUP7gRgYaKmXHGwoERTuZ7q'
 access_secret = 'LAABWy0FkvFF4oTF00vn847HZHYh9yYG90qB3OAof0PFo'
 
 stop_words = list(get_stop_words('es'))         #Have around 900 stopwords
-nltk_words = list(stopwords.words('spanish'))   #Have around 150 stopwords
+nltk_words = list(stopwords.words('english'))   #Have around 150 stopwords
 stop_words.extend(nltk_words)
 
 def clean(tweet):
     output = []
-    for palabra in tweet:
+    tw = tweet.split(' ')
+    for palabra in tw:
         if not palabra in stop_words:
             if "http" not in palabra:
                 output.append(palabra)
     pal = ' '.join(output)
-    pal = pal.replace('á', 'a')
-    pal = pal.replace('é', 'e')
-    pal = pal.replace('í', 'i')
-    pal = pal.replace('ó', 'o')
-    pal = pal.replace('ú', 'u')
-    pal = pal.replace('ñ', 'n')
-    pal = pal.replace('ñ', 'n')
-    pal = pal.replace('#', '')
-    pal = pal.replace('Á', 'A')
-    pal = pal.replace('É', 'E')
-    pal = pal.replace('Í', 'I')
-    pal = pal.replace('Ó', 'O')
-    pal = pal.replace('Ú', 'U')
-    pal = pal.replace('Ñ', 'n')
-    pal = pal.replace('#', '')
+    mapping = {'á':'a','é':'e','í':'i','ó':'o','ú':'u',
+            'ñ':'n','ñ':'n','#':'' ,'Á':'A','É':'E','Í':'I',
+            'Ó':'O','Ú':'U','Ñ':'n',"”":'',"“":'','-': ' ',
+            ':':'','@':'','!':'','?':'','"':'',',':'','.':'',
+            'RT ':'','The':'',"I'm":'',"'s":'',"i ":'',"\n":'',
+            '&amp':'', 'I':'', ';':'', 'A':''}
+    for k, v in mapping.items():
+        pal = pal.replace(k, v)
     return pal
 
 class TweetsListener(StreamListener):
@@ -54,20 +48,17 @@ class TweetsListener(StreamListener):
         i = 0
         try:
             msg = json.loads(data)
-            tweet = clean(msg['text'].split())
-            pp = pprint.PrettyPrinter(indent=4)
+            tweet = clean(msg['text'])
             print("=====================================")
-            print("TWEET1: ", tweet.encode())
-            print("TWEET2: ",msg['text'].encode())
+            print("ORIGINAL: ",msg['text'])
+            print("LIMPIO: ", tweet)
             print("=====================================")
-            try:
-                for j in range(10):
-                    self.client_socket.send(bytes("{}\n".format(i), "utf-8"))
-                    i += 1
-                    time.sleep(1)
-                self.client_socket.send(tweet.encode())
-            except socket.error: pass
-            #sent = self.client_socket.send(msg['text'].encode('utf-8'))
+            str_list = list(filter(None, tweet.split(" ")))
+            tweet = ' '.join(str_list)
+            print(tweet.split(' '))
+            self.client_socket.send(tweet.encode())
+            self.client_socket.send('\n'.encode())
+
             return True
         except BaseException as e:
             print("DATA ERROR: %s \n" % str(e))
