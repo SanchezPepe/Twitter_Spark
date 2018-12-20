@@ -55,7 +55,6 @@ class TweetsListener(StreamListener):
             print("=====================================")
             str_list = list(filter(None, tweet.split(" ")))
             tweet = ' '.join(str_list)
-            print(tweet.split(' '))
             self.client_socket.send(tweet.encode())
             self.client_socket.send('\n'.encode())
 

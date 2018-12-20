@@ -1,2 +1,2 @@
-@echo "Spark"
-python ReadTweetsg.py
+@echo "Fetch tweets"
+python ReadTweets.py
