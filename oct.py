@@ -58,8 +58,6 @@ tags_DS = hashtag_DS.map(lambda word: (word.lower(), 1))\
 # do processing for each RDD generated in each interval
 tags_DS.foreachRDD(process_rdd)
 
-#sc = pyspark.SparkContext()
-
 ssc.start()
 
 import matplotlib.pyplot as plt
