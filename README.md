@@ -17,12 +17,12 @@ Configurar las API Keys que proporciona Twitter
 
 Para correr cualquiera de las dos diferentes consultas, basta con ejecutar los bats adjuntos:
 Si se desea correr la búsqueda por palabras:
-1. 1_tweets.bat
-2. 2_spark.bat
+1. _tweets.bat_
+2. _spark.bat_
 
 Si se desea correr la búsqueda por tendencias:
-1. 3_trending_topics.bat
-2. 3_spark_tt.bat
+1. _trending_topics.bat_
+2. _spark_tt.bat_
 
 ## Resultados
 
