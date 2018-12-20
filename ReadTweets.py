@@ -12,10 +12,10 @@ from stop_words import get_stop_words
 from nltk.corpus import stopwords
 import time
 
-consumer_key = 'jZJhWfSNiBbMp1a6Ov9LrMk92'
-consumer_secret = 'CvfvGaoWCwm3tmnusyNlH7JyaPJxeHV918tEYoIm4YASUQxvMP'
-access_token = '801576292608921600-3P8OkCsVGUP7gRgYaKmXHGwoERTuZ7q'
-access_secret = 'LAABWy0FkvFF4oTF00vn847HZHYh9yYG90qB3OAof0PFo'
+consumer_key = ''
+consumer_secret = ''
+access_token = ''
+access_secret = ''
 
 stop_words = list(get_stop_words('es'))         #Have around 900 stopwords
 nltk_words = list(stopwords.words('english'))   #Have around 150 stopwords
